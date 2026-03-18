@@ -1,51 +1,51 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  entry: './index.js',
+  entry: "./src/index.js",
 
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
     clean: true,
-    assetModuleFilename: '[name][ext]'
+    assetModuleFilename: "[name][ext]",
   },
 
-  mode: 'development',
+  mode: "development",
 
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
+        type: "asset/resource",
         generator: {
-          filename: 'images/[name][ext]'
-        }
+          filename: "images/[name][ext]",
+        },
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: 'asset/resource',
+        type: "asset/resource",
         generator: {
-          filename: 'fonts/[name][ext]'
-        }
-      }
-    ]
+          filename: "fonts/[name][ext]",
+        },
+      },
+    ],
   },
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: './index.html',
-      filename: 'index.html'
-    }),          // ← 逗号在这里
+      template: "./src/index.html",
+      filename: "index.html",
+    }), // ← 逗号在这里
     new CopyPlugin({
       patterns: [
-        { from: 'images', to: 'images' },
-        { from: 'fonts', to: 'fonts' },
+        { from: "src/images", to: "images" },
+        { from: "src/fonts", to: "fonts" },
       ],
     }),
   ],
@@ -55,7 +55,7 @@ module.exports = {
     open: true,
     hot: true,
     static: {
-      directory: path.join(__dirname, 'dist')
-    }
-  }
+      directory: path.join(__dirname, "dist"),
+    },
+  },
 };
